@@ -5,15 +5,33 @@
   
 
   
-  <title>wiki&#39;s blog</title>
+  <title>STM32F429開箱與GPIO測試 | wiki&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="wiki&#39;s blog">
-<meta property="og:url" content="http://wiki0712.github.io/index.html">
+  <meta name="description" content="最近買了一塊 STM32F429IDISCOVERY 來玩玩  STM32應該算是想學embedded system的經典款，網路上資料也挺多 想說就從這一塊來入手吧 之後應該會陸續寫寫我玩這塊板子的心得 以下先簡單介紹一下這塊板子~ STM32F429IDISCOVERY overview ARM cortex-M4 2MB flash memory 64-MBIT DRAM 3-axis gy">
+<meta name="keywords" content="embedded STM32">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STM32F429開箱與GPIO測試">
+<meta property="og:url" content="http://wiki0712.github.io/2018/07/29/2018-08-05-STM32-LED-blink/index.html">
 <meta property="og:site_name" content="wiki&#39;s blog">
+<meta property="og:description" content="最近買了一塊 STM32F429IDISCOVERY 來玩玩  STM32應該算是想學embedded system的經典款，網路上資料也挺多 想說就從這一塊來入手吧 之後應該會陸續寫寫我玩這塊板子的心得 以下先簡單介紹一下這塊板子~ STM32F429IDISCOVERY overview ARM cortex-M4 2MB flash memory 64-MBIT DRAM 3-axis gy">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://wiki0712.github.io/2018/07/29/2018-08-05-STM32-LED-blink/STM32F429IDISCOVERY.jpg">
+<meta property="og:image" content="http://wiki0712.github.io/2018/07/29/2018-08-05-STM32-LED-blink/boot_space.png">
+<meta property="og:image" content="http://wiki0712.github.io/2018/07/29/2018-08-05-STM32-LED-blink/boot_pin_schematic.png">
+<meta property="og:image" content="http://wiki0712.github.io/2018/07/29/2018-08-05-STM32-LED-blink/boot_mem_mapping.png">
+<meta property="og:image" content="http://wiki0712.github.io/2018/07/29/2018-08-05-STM32-LED-blink/LED_schematic.png">
+<meta property="og:image" content="http://wiki0712.github.io/2018/07/29/2018-08-05-STM32-LED-blink/memory_map.png">
+<meta property="og:image" content="http://wiki0712.github.io/2018/07/29/2018-08-05-STM32-LED-blink/RCC.png">
+<meta property="og:image" content="http://wiki0712.github.io/2018/07/29/2018-08-05-STM32-LED-blink/GPIO_mode.png">
+<meta property="og:image" content="http://wiki0712.github.io/2018/07/29/2018-08-05-STM32-LED-blink/GPIO_output_type.png">
+<meta property="og:image" content="http://wiki0712.github.io/2018/07/29/2018-08-05-STM32-LED-blink/GPIO_pupd.png">
+<meta property="og:image" content="http://wiki0712.github.io/2018/07/29/2018-08-05-STM32-LED-blink/GPIO_set.png">
+<meta property="og:image" content="http://wiki0712.github.io/2018/07/29/2018-08-05-STM32-LED-blink/STM32_utility.jpg">
+<meta property="og:updated_time" content="2018-08-12T16:33:33.209Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="wiki&#39;s blog">
+<meta name="twitter:title" content="STM32F429開箱與GPIO測試">
+<meta name="twitter:description" content="最近買了一塊 STM32F429IDISCOVERY 來玩玩  STM32應該算是想學embedded system的經典款，網路上資料也挺多 想說就從這一塊來入手吧 之後應該會陸續寫寫我玩這塊板子的心得 以下先簡單介紹一下這塊板子~ STM32F429IDISCOVERY overview ARM cortex-M4 2MB flash memory 64-MBIT DRAM 3-axis gy">
+<meta name="twitter:image" content="http://wiki0712.github.io/2018/07/29/2018-08-05-STM32-LED-blink/STM32F429IDISCOVERY.jpg">
   
     <link rel="alternate" href="/atom.xml" title="wiki&#39;s blog" type="application/atom+xml">
   
@@ -60,9 +78,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-2018-08-05-STM32-LED-blink" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-2018-08-05-STM32-LED-blink" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/07/29/2018-08-05-STM32-LED-blink/" class="article-date">
   <time datetime="2018-07-29T13:10:27.000Z" itemprop="datePublished">2018-07-29</time>
@@ -75,8 +91,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/29/2018-08-05-STM32-LED-blink/">STM32F429開箱與GPIO測試</a>
+    <h1 class="article-title" itemprop="name">
+      STM32F429開箱與GPIO測試
     </h1>
   
 
@@ -157,51 +173,26 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/07/01/hello-world/" class="article-date">
-  <time datetime="2018-07-01T06:26:02.575Z" itemprop="datePublished">2018-07-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/01/hello-world/">Hello World</a>
-    </h1>
+    <a href="/2018/07/01/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>blog開張!!<br>研究了半天，決定還是用土炮hexo了<br>之後可能會不定時分享技術心得或發一些廢文</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://wiki0712.github.io/2018/07/01/hello-world/" data-id="cjkfo83u60003vov6y2qu8sql" class="article-share-link">Share</a>
-      
-        <a href="http://wiki0712.github.io/2018/07/01/hello-world/#disqus_thread" class="article-comment-link">Comments</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
 
 
-  
-
-
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
 </section>
         
           <aside id="sidebar">
@@ -281,11 +272,13 @@
 <script>
   var disqus_shortname = 'wiki0712githubio';
   
+  var disqus_url = 'http://wiki0712.github.io/2018/07/29/2018-08-05-STM32-LED-blink/';
+  
   (function(){
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
   })();
 </script>
