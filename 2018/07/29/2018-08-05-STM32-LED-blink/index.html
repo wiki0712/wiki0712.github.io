@@ -27,7 +27,7 @@
 <meta property="og:image" content="http://wiki0712.github.io/2018/07/29/2018-08-05-STM32-LED-blink/GPIO_pupd.png">
 <meta property="og:image" content="http://wiki0712.github.io/2018/07/29/2018-08-05-STM32-LED-blink/GPIO_set.png">
 <meta property="og:image" content="http://wiki0712.github.io/2018/07/29/2018-08-05-STM32-LED-blink/STM32_utility.jpg">
-<meta property="og:updated_time" content="2018-08-12T16:33:33.209Z">
+<meta property="og:updated_time" content="2018-08-26T09:17:03.270Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="STM32F429開箱與GPIO測試">
 <meta name="twitter:description" content="最近買了一塊 STM32F429IDISCOVERY 來玩玩  STM32應該算是想學embedded system的經典款，網路上資料也挺多 想說就從這一塊來入手吧 之後應該會陸續寫寫我玩這塊板子的心得 以下先簡單介紹一下這塊板子~ STM32F429IDISCOVERY overview ARM cortex-M4 2MB flash memory 64-MBIT DRAM 3-axis gy">
@@ -120,7 +120,7 @@
 <img src="/2018/07/29/2018-08-05-STM32-LED-blink/boot_pin_schematic.png">
 <p>然後我們從 User manual中可以看出來，Flash memory的start address是0x08000000<br>等開機時，會自動將0x08000000-0x080FFFFF 映射到 0x00000000-0x000FFFFF，所以將bin檔燒在0x08000000，<br>STM32F429就可以從0x00000000開始執行</p>
 <img src="/2018/07/29/2018-08-05-STM32-LED-blink/boot_mem_mapping.png">
-<p>Reset後，STM32F429會從 0x00000000 得到 MSP(Main Stack Pointer)。 也就是說，如果你在 0x00000000填0x1000，<br>那CPU reset 後 stack將是 0x20000000 - 0x20001000。<br>接下來 從0x00000001得到 Program Counter，及code第一個指令開始的位址</p>
+<p>Reset後，STM32F429會從 0x00000000 得到 MSP(Main Stack Pointer)。 也就是說，如果你在 0x00000000填0x20001000，<br>那CPU reset 後 stack將是 0x20000000 - 0x20001000。<br>接下來 從0x00000001得到 Program Counter，及code第一個指令開始的位址</p>
 <p>以上行為可以用C語言達成 :<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">asm</span>(<span class="string">".word 0x20001000"</span>);</span><br><span class="line"><span class="keyword">asm</span>(<span class="string">".word main "</span>); <span class="comment">//指定起始 為main()的address</span></span><br></pre></td></tr></table></figure></p>
 <p>講完了reset flow，接下來來實作 LED blink吧!</p>
 <h2 id="LED-blink-demo"><a href="#LED-blink-demo" class="headerlink" title="LED blink demo"></a>LED blink demo</h2><p>STM32F429IDISCOVERY 有兩顆可控制的LED</p>
@@ -163,7 +163,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://wiki0712.github.io/2018/07/29/2018-08-05-STM32-LED-blink/" data-id="cjkfo83tm0000vov6blyfkv99" class="article-share-link">Share</a>
+      <a data-url="http://wiki0712.github.io/2018/07/29/2018-08-05-STM32-LED-blink/" data-id="cjkr2lk7j0000agv6up0ppz6t" class="article-share-link">Share</a>
       
         <a href="http://wiki0712.github.io/2018/07/29/2018-08-05-STM32-LED-blink/#disqus_thread" class="article-comment-link">Comments</a>
       
